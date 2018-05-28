@@ -13,6 +13,7 @@ public class GPSSpeedFixModule implements IXposedHookLoadPackage {
     private static final String TAG = "GPSSpeedFix";
     private static final String SERVICE = "com.android.server.location.GpsLocationProvider";
     private Location[] mLocation = new Location[3];
+//    private Location[] mLocation = new Location[2];
     private float lastAcceptableBearing = 0;
     private float distance = 0;
     private long time = 0;
@@ -55,7 +56,7 @@ public class GPSSpeedFixModule implements IXposedHookLoadPackage {
                 mLocation[2] = l;
             }
 
-            if ((int) param.args[4] < 1) param.args[5] = lastAcceptableBearing;
+            if ((float) param.args[4] < 1) param.args[5] = lastAcceptableBearing;
             else lastAcceptableBearing = (float)param.args[5];
         }
     };
